@@ -68,6 +68,10 @@ public class Password
 
     public static Password Create(string value)
     {
+        if (value.Length < 8)
+        {
+            throw new ArgumentException("Password must contains at least 8 characters.");
+        }
         return new Password(value);
     }
 }
