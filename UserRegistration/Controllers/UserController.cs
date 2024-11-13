@@ -72,6 +72,11 @@ public class Password
         {
             throw new ArgumentException("Password must contains at least 8 characters.");
         }
+
+        if (!value.Contains('_'))
+        {
+            throw new ArgumentException("Password must contains one underscore.");
+        }
         return new Password(value);
     }
 }
