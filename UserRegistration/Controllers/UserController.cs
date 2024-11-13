@@ -34,6 +34,7 @@ public class UserRepository
     
     public void Save(User user)
     {
+        user.Id = Guid.NewGuid();
         users.Add(user);
     }
 
@@ -45,7 +46,7 @@ public class UserRepository
 
 public class User
 {
-    public Guid Id { get; }
+    public Guid Id { get; set; }
     public string Email { get; }
     public string Password { get; }
 
