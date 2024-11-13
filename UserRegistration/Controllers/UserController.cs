@@ -16,7 +16,7 @@ public class UserController : ControllerBase
     [HttpPost]
     public IActionResult Post(UserRequest request)
     {
-        var user = new User(request.email, request.password);
+        var user = new User(request.email, Password.Create(request.password));
         userRepository.Save(user);
         return CreatedAtAction(nameof(Post), user);
     }
@@ -47,13 +47,28 @@ public class UserRepository
 public class User
 {
     public Guid Id { get; set; }
-    public string Email { get; }
-    public string Password { get; }
+    public string Email2 { get; }
+    public Password Password2 { get; }
 
-    public User(string email, string password)
+    public User(string email2, Password password2)
     {
-        Email = email;
-        Password = password;
+        Email2 = email2;
+        Password2 = password2;
+    }
+}
+
+public class Password
+{
+    public string Value { get; }
+
+    private Password(string value)
+    {
+        Value = value;
+    }
+
+    public static Password Create(string value)
+    {
+        return new Password(value);
     }
 }
 
