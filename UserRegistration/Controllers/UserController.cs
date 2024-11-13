@@ -6,11 +6,40 @@ namespace UserRegistration.Controllers;
 [Route("[controller]")]
 public class UserController : ControllerBase
 {
+    private readonly UserRepository userRepository;
+
+    public UserController(UserRepository repository)
+    {
+        userRepository = repository;
+    }
+    
     [HttpPost]
     public IActionResult Post(UserRequest request)
     {
         var user = new User(request.email, request.password);
+        userRepository.Save(user);
         return CreatedAtAction(nameof(Post), user);
+    }
+
+    [HttpGet]
+    public IActionResult GetAll()
+    {
+        return Ok(userRepository.GetAllUsers());
+    }
+}
+
+public class UserRepository
+{
+    private List<User> users = new List<User>();
+    
+    public void Save(User user)
+    {
+        users.Add(user);
+    }
+
+    public List<User> GetAllUsers()
+    {
+        return users;
     }
 }
 
