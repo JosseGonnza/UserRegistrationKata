@@ -17,6 +17,11 @@ public class UserController : ControllerBase
     public IActionResult Post(UserRequest request)
     {
         var user = new User(request.email, Password.Create(request.password));
+        var existingUser = userRepository.GetAllUsers().FirstOrDefault(u => u.Email2 == request.email);
+        if (existingUser != null)
+        {
+            return BadRequest("Email already exist");
+        }
         userRepository.Save(user);
         return CreatedAtAction(nameof(Post), user);
     }
