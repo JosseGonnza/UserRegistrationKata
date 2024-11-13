@@ -1,4 +1,5 @@
 using UserRegistration.Controllers;
+using UserRegistration.Repositories;
 
 var builder = WebApplication.CreateBuilder(args);
 

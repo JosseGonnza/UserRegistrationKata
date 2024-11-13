@@ -1,5 +1,6 @@
 using FluentAssertions;
 using UserRegistration.Controllers;
+using UserRegistration.ValueObjects;
 
 namespace UserTest;
 
